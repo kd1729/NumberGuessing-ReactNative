@@ -1,18 +1,12 @@
 import { StyleSheet, Text, View, Button } from "react-native";
+import StartGameScreen from "./screens/StartGameScreen";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Button title="Click Me" />
-    </View>
+    <StartGameScreen />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "green",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  
 });
