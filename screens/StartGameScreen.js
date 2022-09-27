@@ -9,8 +9,10 @@ function StartGameScreen() {
         maxLength={2}
         keyboardType="number-pad"
       />
-      <PrimaryButton child="Reset" />
-      <PrimaryButton child="Confirm" />
+      <View style={styles.buttonsContainer}>
+        <PrimaryButton child="Reset" />
+        <PrimaryButton child="Confirm" />
+      </View>
     </View>
   );
 }
@@ -19,6 +21,7 @@ export default StartGameScreen;
 
 const styles = StyleSheet.create({
   inputContainer: {
+    alignItems: "center",
     padding: 16,
     marginHorizontal: 24,
     marginTop: 100,
@@ -27,12 +30,19 @@ const styles = StyleSheet.create({
   },
   numberInput: {
     height: 50,
-    fontSize: 32,
+    fontSize: 40,
+    borderBottomWidth: 2,
     borderBottomColor: "#ddb52f",
     color: "#ddb52f",
-    marginVertical: 8,
+    marginTop: 8,
+    marginBottom: 32,
     fontWeight: "bold",
     width: 50,
     textAlign: "center",
   },
+    buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    },
 });
