@@ -2,10 +2,9 @@ import { View, TextInput, StyleSheet, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
 
-function StartGameScreen() {
+function StartGameScreen({onConfirmed}) {
 
   const [numberEntered, setNumberEntered] = useState("");
-
 
   function resetInputHandler() {
     setNumberEntered("");
@@ -18,6 +17,7 @@ function StartGameScreen() {
       [{text: "Okay", style: "destructive", onPress: resetInputHandler}]);
       return;
     }
+    onConfirmed(chosenNumber);
   }
 
   return (
