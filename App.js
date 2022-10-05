@@ -17,7 +17,7 @@ export default function App() {
   }
 
   function gameOverHandler() {
-    setGameIsover(false);
+    setGameIsover(true);
   }
 
   return (
@@ -33,12 +33,13 @@ export default function App() {
       >
         <SafeAreaView style={styles.rootScreen}>
 
-          { (gameIsover && userNumber) ? <GameOverScreen />: (userNumber ? (
+          { (gameIsover && userNumber) ? <GameOverScreen />: 
+          
+          (userNumber ? (
             <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
           ) : (
             <StartGameScreen onConfirmed={pickedNumberHandler} />
           ))}
-          
           
         </SafeAreaView>
       </ImageBackground>
