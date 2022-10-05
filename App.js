@@ -5,12 +5,19 @@ import { ImageBackground, SafeAreaView } from "react-native";
 import GameScreen from "./screens/GameScreen";
 import { useState } from "react";
 import Colors from "./constants/colors";
+import GameOverScreen from "./screens/GameOverScreen";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
+  const [gameIsover, setGameIsover] = useState(true);
 
   function pickedNumberHandler(number) {
     setUserNumber(number);
+    setGameIsover(false);
+  }
+
+  function gameOverHandler() {
+    setGameIsover(false);
   }
 
   return (
@@ -25,11 +32,14 @@ export default function App() {
         imageStyle={styles.backgroundImg}
       >
         <SafeAreaView style={styles.rootScreen}>
-          {userNumber ? (
-            <GameScreen userNumber={userNumber} />
+
+          { (gameIsover && userNumber) ? <GameOverScreen />: (userNumber ? (
+            <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
           ) : (
             <StartGameScreen onConfirmed={pickedNumberHandler} />
-          )}
+          ))}
+          
+          
         </SafeAreaView>
       </ImageBackground>
     </LinearGradient>
