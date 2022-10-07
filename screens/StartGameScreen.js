@@ -1,7 +1,8 @@
-import { View, TextInput, StyleSheet, Alert } from "react-native";
+import { View, TextInput, StyleSheet, Alert, Text } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { useState } from "react";
 import Colors from "../constants/colors";
+import Title from "../components/ui/Ttile";
 
 function StartGameScreen({ onConfirmed }) {
   const [numberEntered, setNumberEntered] = useState("");
@@ -22,17 +23,21 @@ function StartGameScreen({ onConfirmed }) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.numberInput}
-        maxLength={2}
-        keyboardType="number-pad"
-        value={numberEntered}
-        onChangeText={(text) => setNumberEntered(text)}
-      />
-      <View style={styles.buttonsContainer}>
-        <PrimaryButton child="Reset" onPress={resetInputHandler} />
-        <PrimaryButton child="Confirm" onPress={confirmInputHandler} />
+    <View style={styles.rootContainer}>
+      <Title child="Start a new game!"/>
+      <View style={styles.inputContainer}>
+        <Text style={styles.instructionText}>Input a number</Text>
+        <TextInput
+          style={styles.numberInput}
+          maxLength={2}
+          keyboardType="number-pad"
+          value={numberEntered}
+          onChangeText={(text) => setNumberEntered(text)}
+        />
+        <View style={styles.buttonsContainer}>
+          <PrimaryButton child="Reset" onPress={resetInputHandler} />
+          <PrimaryButton child="Confirm" onPress={confirmInputHandler} />
+        </View>
       </View>
     </View>
   );
@@ -41,11 +46,20 @@ function StartGameScreen({ onConfirmed }) {
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    marginTop: 100,
+    alignItems: "center",
+  },
+  instructionText: {
+    color: Colors.accent500,
+    fontSize: 30,
+  },
   inputContainer: {
     alignItems: "center",
     padding: 16,
     marginHorizontal: 24,
-    marginTop: 100,
+    marginTop: 36,
     backgroundColor: Colors.primary800,
     borderRadius: 8,
   },
