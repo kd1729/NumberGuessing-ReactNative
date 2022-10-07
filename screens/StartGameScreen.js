@@ -3,6 +3,7 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import { useState } from "react";
 import Colors from "../constants/colors";
 import Title from "../components/ui/Ttile";
+import Card from "../components/ui/Card";
 
 function StartGameScreen({ onConfirmed }) {
   const [numberEntered, setNumberEntered] = useState("");
@@ -24,8 +25,8 @@ function StartGameScreen({ onConfirmed }) {
 
   return (
     <View style={styles.rootContainer}>
-      <Title child="Start a new game!"/>
-      <View style={styles.inputContainer}>
+      <Title child="Start a new game!" />
+      <Card>
         <Text style={styles.instructionText}>Input a number</Text>
         <TextInput
           style={styles.numberInput}
@@ -38,7 +39,7 @@ function StartGameScreen({ onConfirmed }) {
           <PrimaryButton child="Reset" onPress={resetInputHandler} />
           <PrimaryButton child="Confirm" onPress={confirmInputHandler} />
         </View>
-      </View>
+      </Card>
     </View>
   );
 }
@@ -54,14 +55,6 @@ const styles = StyleSheet.create({
   instructionText: {
     color: Colors.accent500,
     fontSize: 30,
-  },
-  inputContainer: {
-    alignItems: "center",
-    padding: 16,
-    marginHorizontal: 24,
-    marginTop: 36,
-    backgroundColor: Colors.primary800,
-    borderRadius: 8,
   },
   numberInput: {
     height: 50,
