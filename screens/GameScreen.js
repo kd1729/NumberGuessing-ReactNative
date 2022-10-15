@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
+import { Ionicons } from "@expo/vector-icons";
 
 function generateRandomBetween(min, max, exclude) {
   console.log(min, max, exclude);
@@ -64,12 +65,12 @@ function GameScreen({ userNumber, onGameOver }) {
         <View style={styles.buttonsContainer}>
           <PrimaryButton
             style1={styles.plusminus}
-            child="+"
+            child={<Ionicons name="md-remove" size={24} color="white" />}
             onPress={nextGuessHandler.bind(this, "higher")}
           />
           <PrimaryButton
             style1={styles.plusminus}
-            child="-"
+            child={<Ionicons name="md-add" size={24} color="white" />}
             onPress={nextGuessHandler.bind(this, "lower")}
           />
         </View>
