@@ -13,6 +13,7 @@ import AppLoading from "expo-app-loading";
 export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [gameIsover, setGameIsover] = useState(true);
+  const [roundsNumber, setRoundsNumber] = useState(0);
 
   const[fontsLoaded] = useFonts({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
@@ -33,6 +34,12 @@ export default function App() {
     setGameIsover(true);
   }
 
+  function startNewGameHandler(){
+    setRoundsNumber(0);
+    setUserNumber(null);
+    setGameIsover(false);
+  }
+
   return (
     <LinearGradient
       colors={[Colors.primary700, Colors.accent500]}
@@ -46,7 +53,7 @@ export default function App() {
       >
         <SafeAreaView style={styles.rootScreen}>
 
-          { (gameIsover && userNumber) ? <GameOverScreen />: 
+          { (gameIsover && userNumber) ? <GameOverScreen userNumber={userNumber} roundsNumber={roundsNumber} onStartNewGame={startNewGameHandler} />: 
           
           (userNumber ? (
             <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
