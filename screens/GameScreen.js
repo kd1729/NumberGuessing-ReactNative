@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, FlatList } from "react-native";
 import Title from "../components/ui/Ttile";
 import NumberContainer from "../components/game/NumberContainer";
 import { useState, useEffect } from "react";
@@ -26,6 +26,7 @@ let maxBound = 100;
 function GameScreen({ userNumber, onGameOver }) {
   const initialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const [rounds, setRounds] = useState([initialGuess]);
   // console.log(currentGuess);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ function GameScreen({ userNumber, onGameOver }) {
 
   useEffect(() => {
     minBound = 1;
-    maxBound = 100; 
+    maxBound = 100;
   }, []);
 
   function nextGuessHandler(direction) {
@@ -58,6 +59,7 @@ function GameScreen({ userNumber, onGameOver }) {
     }
     newRandomNumber = generateRandomBetween(minBound, maxBound, currentGuess);
     setCurrentGuess(newRandomNumber);
+    setRounds((currentRounds) => [newRandomNumber, ...currentRounds]);
   }
 
   return (
@@ -66,7 +68,10 @@ function GameScreen({ userNumber, onGameOver }) {
       <NumberContainer child={currentGuess} />
 
       <Card>
-        <InstructionText style={styles.InstructionText} child="Higher or Lower" /> 
+        <InstructionText
+          style={styles.InstructionText}
+          child="Higher or Lower"
+        />
         <View style={styles.buttonsContainer}>
           <PrimaryButton
             style1={styles.plusminus}
@@ -81,7 +86,19 @@ function GameScreen({ userNumber, onGameOver }) {
         </View>
       </Card>
 
-      <View></View>
+      <View>
+        <FlatList 
+          data={rounds}
+          keyExtractor={(item) => item.toString()}
+          renderItem={(itemData) => (
+            <View style={styles.listItem}>
+              <Text>#{rounds.length - itemData.index}</Text>
+              <Text>{itemData.item}</Text>
+            </View>
+          )}
+        />
+      </View>
+      
     </View>
   );
 }
@@ -94,7 +111,7 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   InstructionText: {
-      marginBottom: 12,
+    marginBottom: 12,
   },
   plusminus: {
     width: 130,
