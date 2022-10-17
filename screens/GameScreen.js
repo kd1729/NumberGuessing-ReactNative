@@ -42,9 +42,11 @@ function GameScreen({ userNumber, onGameOver }) {
   }, []);
 
   function nextGuessHandler(direction) {
+    console.log(direction, currentGuess, userNumber);
+    console.log();
     if (
       (direction === "lower" && currentGuess < userNumber) ||
-      (direction === "greater" && currentGuess > userNumber)
+      (direction === "higher" && currentGuess > userNumber)
     ) {
       Alert.alert("Don't lie!", "You know that this is wrong...", [
         { text: "Sorry!", style: "cancel" },
