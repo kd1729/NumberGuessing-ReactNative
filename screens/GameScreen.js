@@ -9,10 +9,10 @@ import { Ionicons } from "@expo/vector-icons";
 import GuessItemLog from "../components/game/GuessLogItem";
 
 function generateRandomBetween(min, max, exclude) {
-  console.log(min, max, exclude);
+  // console.log(min, max, exclude);
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
-  console.log(rndNum);
-  console.log();
+  // console.log(rndNum);
+  // console.log();
 
   if (rndNum === exclude) {
     return generateRandomBetween(min, max, exclude);
@@ -32,7 +32,7 @@ function GameScreen({ userNumber, onGameOver }) {
 
   useEffect(() => {
     if (currentGuess === userNumber) {
-      onGameOver();
+      onGameOver(rounds.length);
     }
   }, [currentGuess, userNumber, onGameOver]);
 
@@ -87,7 +87,7 @@ function GameScreen({ userNumber, onGameOver }) {
         </View>
       </Card>
 
-      <View>
+      <View style={styles.listContainer}>
         <FlatList 
           data={rounds}
           keyExtractor={(item) => item.toString()}
@@ -117,4 +117,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
   },
+  listContainer: {
+    flex: 1,
+    padding: 16,
+  }
 });
